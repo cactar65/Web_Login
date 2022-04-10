@@ -1,4 +1,8 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+DB_NAME = "database.db"
 
 
 # this function creates the app from flask.
@@ -7,6 +11,8 @@ def create_app():
     app = Flask(__name__)
     #enycrption key for the app
     app.config['SECRET_KEY'] = "asdawwrrx fefegerc asdfesa"
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    db.init_app(app)
 
     # this is importing the view from the views file
     from .views import views
